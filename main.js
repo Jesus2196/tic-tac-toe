@@ -42,45 +42,45 @@ function init() {
     turn = 1;
     winner = null;
     renderBoard();
+    renderMsg();
 }
 
 function renderBoard() {
     board.forEach(function (square, index) {
         squares[index].style.background = colors[square];
     });
+}
+
+function renderMsg() {
     if (!winner) {
         heading.innerHTML = (`${colors[turn].toUpperCase()}'S TURN`);
     } else if (winner === "T") {
         heading.innerHTML = "Tie Game; There was NO winner...";
     } else {
-        heading.innerHTML = (`${colors[turn]} IS THE WINNER`);
+        heading.innerHTML = (`${colors[turn].toUpperCase()} IS THE WINNER`);
     }
 }
 
 function handleSquare(evt) {
     let index = parseInt(evt.target.id.replace("square", ""));
-    if (board[index] || winner) return;
-    board[index] = turn;
+    if (board[index] !== null) return;
+    board[index] = turn
     turn *= -1;
     winner = gameWinner();
     renderBoard();
+    renderMsg();
 }
 
 function gameWinner() {
-    for (let i = 0; i < winCombos.length; i++) {
-        if (Math.abs(board[0] + board[1] + board[2]) === 3) return board[0];
-        if (Math.abs(board[3] + board[4] + board[5]) === 3) return board[3];
-        if (Math.abs(board[6] + board[7] + board[8]) === 3) return board[6];
-        if (Math.abs(board[0] + board[3] + board[6]) === 3) return board[0];
-        if (Math.abs(board[1] + board[4] + board[7]) === 3) return board[1];
-        if (Math.abs(board[2] + board[5] + board[8]) === 3) return board[2];
-        if (Math.abs(board[0] + board[4] + board[8]) === 3) return board[0];
-        if (Math.abs(board[2] + board[4] + board[6]) === 3) return board[2];
-        winner = board[winCombos[i][0]];
-    }
-    // }
-    // if (board.includes(null)) {
-    //     winner = "T";
-    // };
-    renderBoard();
+    winCombos.forEach(function (winCombo) {
+        let total = board[winCombo[0]] + board[winCombo[1]] + board[winCombo[2]];
+        if (Math.abs(total) === 3) {
+            turn *= -1;
+            winner = turn;
+        } else {
+            return;
+        }
+    })
+    console.log(winner);
+    return winner;
 }

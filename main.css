@@ -15,9 +15,19 @@ body {
     align-items: center;
 }
 
+header {
+    margin-top: 50px;
+    font-size: 4vmin;
+    letter-spacing: 1vmin;
+    color: grey;
+  }
+
 h1 {
-    margin-top: 0;
+    font-size: 4vmin;
+    margin-top: 10px;
     margin-bottom: 50px;
+    letter-spacing: .5vmin;
+    color: grey;
 }
 
 td {
@@ -25,7 +35,7 @@ td {
     width: 200px;
 }
 
-td div {
+td > div {
     margin: 0 auto;
     height: 50px;
     width: 50px;
@@ -34,13 +44,13 @@ td div {
 }
 
 tr td:nth-child(2) {
-    border-left: 4px dashed grey;
-    border-right: 4px dashed grey;
+    border-left: 4px solid grey;
+    border-right: 4px solid grey;
 }
 
 tr:nth-child(2) td {
-    border-top: 4px dashed grey;
-    border-bottom: 4px dashed grey;
+    border-top: 4px solid grey;
+    border-bottom: 4px solid grey;
 }
 
 button {
